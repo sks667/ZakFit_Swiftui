@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E967F7072D06FEEF007C11F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E967F7062D06FEEF007C11F1 /* Security.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E967F6D22D053BA9007C11F1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		E967F6C12D053BA7007C11F1 /* ZakFit_Swiftui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZakFit_Swiftui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E967F6D12D053BA9007C11F1 /* ZakFit_SwiftuiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZakFit_SwiftuiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E967F6DB2D053BA9007C11F1 /* ZakFit_SwiftuiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZakFit_SwiftuiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E967F7062D06FEEF007C11F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E967F7072D06FEEF007C11F1 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +84,7 @@
 				E967F6C32D053BA7007C11F1 /* ZakFit_Swiftui */,
 				E967F6D42D053BA9007C11F1 /* ZakFit_SwiftuiTests */,
 				E967F6DE2D053BA9007C11F1 /* ZakFit_SwiftuiUITests */,
+				E967F7052D06FEEF007C11F1 /* Frameworks */,
 				E967F6C22D053BA7007C11F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +97,14 @@
 				E967F6DB2D053BA9007C11F1 /* ZakFit_SwiftuiUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E967F7052D06FEEF007C11F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E967F7062D06FEEF007C11F1 /* Security.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
