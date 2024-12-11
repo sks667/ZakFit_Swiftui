@@ -31,7 +31,7 @@ struct RepasView: View {
             }
             .navigationTitle("Liste des Aliments")
             .onAppear {
-                viewModel.fetchAliments() // Récupérer les aliments dès que la vue apparaît
+                viewModel.fetchAliments() // Récupérer les aliments dès que la vue apparaî
             }
         }
     }
