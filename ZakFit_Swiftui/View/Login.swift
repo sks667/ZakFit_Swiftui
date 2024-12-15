@@ -50,12 +50,22 @@ struct LoginView: View {
                         .cornerRadius(8)
                 }
                 .navigationDestination(isPresented: $viewModel.isLoggedIn) {
-                    ContentView()
+                    RepasView()
                         .navigationBarBackButtonHidden(true)
                 }
                 
                 
                 .padding(.top, 20)
+                
+                NavigationLink(destination: RegisterView()) {
+                    Text("Créer un compte")
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
             }
             .padding()
         }

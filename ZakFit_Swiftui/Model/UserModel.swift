@@ -15,7 +15,7 @@ struct UserModel: Codable, Identifiable {
     var mdp: String
     var taille: Int
     var poids: Int
-    var preferenceAlimentaire: String
+    var preference_alimentaire: String
     
 
 }

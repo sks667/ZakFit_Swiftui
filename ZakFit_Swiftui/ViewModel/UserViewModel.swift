@@ -76,4 +76,47 @@ class UserViewModel: ObservableObject {
             }
         }.resume()
     }
+    
+    func register(nom: String, prenom: String, taille: Int, poids: Int, email: String, mdp: String, preferenceAlimentaire: String) {
+        guard let url = URL(string: "http://localhost:8080/user") else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // Préparer les données à envoyer
+        let user = UserModel(
+            id: nil,
+            nom: nom,
+            prenom: prenom,
+            email: email,
+            mdp: mdp,
+            taille: taille,
+            poids: poids,
+            preference_alimentaire: preferenceAlimentaire
+        )
+
+        // Encoder les données en JSON
+        do {
+            let jsonData = try JSONEncoder().encode(user)
+            request.httpBody = jsonData
+        } catch {
+            print("Erreur lors de l'encodage des données : \(error.localizedDescription)")
+            return
+        }
+
+        // Envoyer la requête
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Erreur de requête : \(error.localizedDescription)")
+                return
+            }
+
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                print("Utilisateur enregistré avec succès !")
+            } else {
+                print("Erreur lors de l'enregistrement : \(response.debugDescription)")
+            }
+        }.resume()
+    }
 }
