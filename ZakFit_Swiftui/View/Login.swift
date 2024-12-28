@@ -45,8 +45,8 @@ struct LoginView: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
+                        .background(Color.orange)
+                        .foregroundColor(.black)
                         .cornerRadius(8)
                 }
                 .navigationDestination(isPresented: $viewModel.isLoggedIn) {
@@ -56,15 +56,13 @@ struct LoginView: View {
                 
                 
                 .padding(.top, 20)
+                .padding(.bottom, 40)
                 
                 NavigationLink(destination: RegisterView()) {
                     Text("Créer un compte")
                         .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                        .foregroundColor(.orange)
+                    
                 }
             }
             .padding()

@@ -29,39 +29,43 @@ struct RegisterView: View {
                 HStack{
                     TextField("Nom", text: $nom)
                         .padding()
-                        .cornerRadius(100)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
                     
                     TextField("Prénom", text: $prenom)
                         .padding()
-                        .cornerRadius(100)
-                }
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)                }
                 
                 HStack{
                     TextField("Taille (en cm)", text: $taille)
                         .keyboardType(.numberPad)
                         .padding()
-                        .cornerRadius(10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
                     
                     TextField("Poids (en kg)", text: $poids)
                         .keyboardType(.numberPad)
                         .padding()
-                        .cornerRadius(10)
-                }
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)                }
                 
                 TextField("Préférences Alimentaires", text: $preferencesAlimentaires)
                     .padding()
-                    .cornerRadius(10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
                     .padding(.bottom, 35)
                 
                 TextField("Email", text: $email)
                     .keyboardType(.emailAddress)
                     .padding()
-                    .cornerRadius(10)
-
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                
                 SecureField("Mot de passe", text: $motDePasse)
                     .padding()
-                    .cornerRadius(10)
-
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
             
 
                 // Bouton d'inscription
@@ -84,11 +88,13 @@ struct RegisterView: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
+                        .background(Color.orange)
+                        .foregroundColor(.black)
                         .cornerRadius(10)
                 }
                 .padding(.top, 20)
+                
+                
 
             }
             .padding()

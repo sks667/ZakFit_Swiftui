@@ -32,5 +32,12 @@ class AlimentViewModel: ObservableObject {
         }.resume()
     }
     
+    func calculerTotalCalories() -> Int {
+        return aliments.count
+    }
     
-}
+    
+    
+    }
+
+
