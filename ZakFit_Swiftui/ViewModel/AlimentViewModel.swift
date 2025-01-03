@@ -8,16 +8,39 @@
 
 import Foundation
 
+
 class AlimentViewModel: ObservableObject {
     @Published var aliments: [Aliment] = [] // Liste des aliments à afficher
+    private let baseURL = "http://127.0.0.1:8080/aliment" // URL de l'API
+    private let token: String // Token d'authentification
+    
+    init(token: String) {
+        self.token = token
+    }
     
     func fetchAliments() {
-        guard let url = URL(string: "http://127.0.0.1:8080/aliment") else {
+        guard let url = URL(string: baseURL) else {
+            print("URL invalide")
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") // Ajout du token
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Erreur réseau : \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("Réponse HTTP invalide : \(String(describing: response))")
+                return
+            }
+            
             guard let data = data else {
+                print("Données manquantes")
                 return
             }
             
@@ -32,12 +55,54 @@ class AlimentViewModel: ObservableObject {
         }.resume()
     }
     
+    
+    func ajouterAliment(nom: String, calories: Int, glucides: Int, lipides: Int) {
+        guard let url = URL(string: "http://127.0.0.1:8080/aliment") else {
+            print("URL invalide")
+            return
+        }
+        
+        let nouvelAliment = [
+            "nom": nom,
+            "qteCalorie": calories,
+            "qteGlucide": glucides,
+            "qteLipide": lipides
+        ] as [String : Any]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: nouvelAliment, options: [])
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsonData
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Erreur lors de la requête POST : \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    print("Réponse du serveur invalide")
+                    return
+                }
+                
+                print("Aliment ajouté avec succès !")
+                DispatchQueue.main.async {
+                    self.fetchAliments()
+                }
+            }.resume()
+        } catch {
+            print("Erreur lors de la création du JSON : \(error.localizedDescription)")
+        }
+    }
+    
     func calculerTotalCalories() -> Int {
         return aliments.count
     }
     
+}
     
     
-    }
 
 

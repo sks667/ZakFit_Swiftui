@@ -7,38 +7,53 @@
 
 import SwiftUI
 
-        struct AjouterAlimentView: View {
-            @Environment(\.dismiss) var dismiss
-            @State private var nom = ""
-            @State private var calories = ""
-            
-            var body: some View {
-                NavigationView {
-                    Form {
-                        Section(header: Text("Informations de l'aliment")) {
-                            TextField("Nom de l'aliment", text: $nom)
-                            TextField("Calories pour 100g", text: $calories)
-                                .keyboardType(.numberPad)
-                        }
+struct AjouterAlimentView: View {
+    @ObservedObject var viewModel: AlimentViewModel
+    @Environment(\.dismiss) var dismiss
+    @State private var nom = ""
+    @State private var calories = ""
+    @State private var lipides = ""
+    @State private var glucides = ""
+
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("Informations de l'aliment")) {
+                    TextField("Nom de l'aliment", text: $nom)
+                    TextField("Calories pour 100g", text: $calories)
+                        .keyboardType(.numberPad)
+                    TextField("Glucides pour 100g", text: $glucides)
+                        .keyboardType(.numberPad)
+                    TextField("Lipides pour 100g", text: $lipides)
+                        .keyboardType(.numberPad)
+                }
+            }
+            .navigationTitle("Ajouter un Aliment")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Annuler") {
+                        dismiss()
                     }
-                    .navigationTitle("Ajouter un Aliment")
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Annuler") {
-                                dismiss()
-                            }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Ajouter") {
+                        guard !nom.isEmpty,
+                              let calories = Int(calories),
+                              let glucides = Int(glucides),
+                              let lipides = Int(lipides) else {
+                            print("Les valeurs des champs ne sont pas valides")
+                            return
                         }
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("Ajouter") {
-                                print("Aliment ajouté : \(nom) - \(calories) kcal")
-                                dismiss()
-                            }
-                        }
+                        viewModel.ajouterAliment(nom: nom, calories: calories, glucides: glucides, lipides: lipides)
+                        dismiss()
                     }
                 }
             }
         }
+    }
+}
 
 #Preview {
-    AjouterAlimentView()
+    let exampleViewModel = AlimentViewModel(token: "fake-token") 
+    AjouterAlimentView(viewModel: exampleViewModel)
 }

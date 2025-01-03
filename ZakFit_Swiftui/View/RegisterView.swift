@@ -68,7 +68,6 @@ struct RegisterView: View {
                     .cornerRadius(8)
             
 
-                // Bouton d'inscription
                 Button(action: {
                     guard let tailleInt = Int(taille), let poidsInt = Int(poids) else {
                         print("Taille ou poids invalide.")

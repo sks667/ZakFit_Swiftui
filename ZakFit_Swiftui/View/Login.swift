@@ -11,8 +11,9 @@ struct LoginView: View {
     @ObservedObject var viewModel = UserViewModel()
     @State private var email: String = ""
     @State private var mdp: String = ""
+    @State private var showError = false // Indicateur pour afficher une alerte
+    @State private var errorMessage = "" // Message d'erreur à afficher
 
-    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -35,9 +36,10 @@ struct LoginView: View {
                 Button(action: {
                     viewModel.login(email: email, mdp: mdp) { success in
                         if success {
-                            viewModel.isLoggedIn = true
+                            // Navigation activée automatiquement via isLoggedIn
                         } else {
-                            print("Identifiants invalides")
+                            errorMessage = "Identifiants invalides. Veuillez réessayer."
+                            showError = true
                         }
                     }
                 }) {
@@ -49,11 +51,22 @@ struct LoginView: View {
                         .foregroundColor(.black)
                         .cornerRadius(8)
                 }
-                .navigationDestination(isPresented: $viewModel.isLoggedIn) {
-                    RepasView()
-                        .navigationBarBackButtonHidden(true)
+                .alert(isPresented: $showError) {
+                    Alert(
+                        title: Text("Erreur"),
+                        message: Text(errorMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
                 }
-                
+                .navigationDestination(isPresented: $viewModel.isLoggedIn) {
+                    if let token = viewModel.token {
+                        AlimentView(token: token) // Utilise le token dynamique
+                            .navigationBarBackButtonHidden(true)
+                    } else {
+                        Text("Erreur : Token non disponible")
+                            .foregroundColor(.red)
+                    }
+                }
                 
                 .padding(.top, 20)
                 .padding(.bottom, 40)
@@ -62,7 +75,6 @@ struct LoginView: View {
                     Text("Créer un compte")
                         .fontWeight(.bold)
                         .foregroundColor(.orange)
-                    
                 }
             }
             .padding()
