@@ -12,35 +12,33 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            // **Accueil**
             VStack {
                 Text("Bienvenue sur ZakFit 🎯")
                     .font(.largeTitle)
                     .padding()
 
-                Text("Sélectionne un onglet pour commencer")
-                    .foregroundColor(.gray)
+             
             }
             .tabItem {
                 Label("Accueil", systemImage: "house")
             }
 
-            // **RepasView**
             RepasView(viewModel: RepasViewModel(token: token))
                 .tabItem {
                     Label("Repas", systemImage: "fork.knife")
                 }
 
-            // **AlimentView**
             AlimentView(token: token)
                 .tabItem {
                     Label("Aliments", systemImage: "leaf")
+                    
                 }
         }
+        .accentColor(.orange)
         .navigationBarBackButtonHidden(true)  // Empêche le bouton retour pour rester sur la TabView
     }
 }
 
 #Preview {
-    MainTabView(token: "fake-token")
+    MainTabView(token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmF0aW9uVGltZSI6NjAwLCJ1c2VySWQiOiJDQUZDRTRENy1CN0FELTQyRTItOUZBRS01MTUwOTIwQTI1OTgiLCJleHBpcmF0aW9uIjoxNzM2MDQ2NTY4LjU0MDg4M30.CijfUlqiMDkYrrVCcypmfdTlHtHEtpkCM6eSb0WnrrM")
 }

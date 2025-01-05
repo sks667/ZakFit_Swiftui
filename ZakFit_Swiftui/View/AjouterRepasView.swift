@@ -32,7 +32,7 @@ struct AjouterRepasView: View {
                     Text("Ajouter le Repas")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.orange)
                         .foregroundColor(.white)
                         .cornerRadius(8)
                         .padding(.horizontal)
@@ -103,7 +103,7 @@ struct AlimentRow: View {
                 quantite = 0  // Réinitialiser après ajout
             }) {
                 Image(systemName: "plus.circle")
-                    .foregroundColor(.blue)
+                    .foregroundColor(.orange)
             }
         }
     }

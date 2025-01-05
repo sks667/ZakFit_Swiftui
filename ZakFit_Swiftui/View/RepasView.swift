@@ -43,6 +43,7 @@ struct RepasView: View {
                                 .cornerRadius(12)
                                 .shadow(radius: 3)
                                 .padding(.horizontal)
+                                .frame(maxWidth: .infinity)
                             }
                         }
                     }
@@ -53,7 +54,7 @@ struct RepasView: View {
                         .font(.system(size: 30, weight: .bold))
                         .foregroundColor(.white)
                         .frame(width: 60, height: 60)
-                        .background(Color.blue)
+                        .background(Color.orange)
                         .clipShape(Circle())
                         .shadow(radius: 5)
                         .padding()
@@ -66,6 +67,7 @@ struct RepasView: View {
                 }) {
                     Image(systemName: "arrow.clockwise.circle")
                         .font(.title2)
+                        .foregroundColor(.orange)
                 }
             }
             .onAppear {
