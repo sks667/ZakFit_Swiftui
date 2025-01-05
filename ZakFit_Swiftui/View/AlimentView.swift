@@ -26,6 +26,7 @@ struct AlimentView: View {
                             .foregroundColor(.gray)
                             .padding()
                     } else {
+                        
                         ForEach(viewModel.aliments) { aliment in
                             HStack {
                                 VStack(alignment: .leading) {
@@ -40,10 +41,15 @@ struct AlimentView: View {
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(10)
                         }
-                        Text("Tu as \(viewModel.aliments.count) aliments enregistrés")
-                            .font(.headline)
+                        
+                        Text("Total des aliments enregistrés : \(viewModel.alimentsCount)")
+                            .font(.title3)
+                            .bold()
                             .padding()
-                            .foregroundStyle(.orange)
+                            .foregroundColor(.orange)
+
+                        
+
                     }
                 }
                 .padding()
@@ -65,12 +71,13 @@ struct AlimentView: View {
             })
             .navigationTitle("Liste des Aliments")
             .onAppear {
-                viewModel.fetchAliments() 
+                viewModel.fetchAliments()  // Récupère la liste complète des aliments
+                viewModel.fetchAlimentsCount()  // Récupère le nombre total d'aliments depuis le backend
             }
         }
     }
 }
 
 #Preview {
-    AlimentView(token: "fake-token")
+    AlimentView(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJDQUZDRTRENy1CN0FELTQyRTItOUZBRS01MTUwOTIwQTI1OTgiLCJleHBpcmF0aW9uIjoxNzM2MDQ0NjQ0Ljk0MzE2MzksImV4cGlyYXRpb25UaW1lIjo2MDB9.cG_Wb-wTrlJIFHsRwMj6HMjG-DwFvkCb2RTlhujF0Vo")
 }

@@ -11,6 +11,7 @@ import Foundation
 
 class AlimentViewModel: ObservableObject {
     @Published var aliments: [Aliment] = [] // Liste des aliments à afficher
+    @Published var alimentsCount: Int = 0
     private let baseURL = "http://127.0.0.1:8080/aliment" // URL de l'API
     private let token: String // Token d'authentification
     
@@ -97,10 +98,44 @@ class AlimentViewModel: ObservableObject {
         }
     }
     
-    func calculerTotalCalories() -> Int {
-        return aliments.count
-    }
     
+    
+    func fetchAlimentsCount() {
+        guard let url = URL(string: "\(baseURL)/count") else {
+            print("URL invalide")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Erreur lors de la récupération du count : \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("Réponse HTTP invalide")
+                return
+            }
+            
+            guard let data = data else {
+                print("Données manquantes")
+                return
+            }
+            
+            do {
+                let count = try JSONDecoder().decode(Int.self, from: data) // Décodage du nombre d'aliments
+                DispatchQueue.main.async {
+                    self.alimentsCount = count
+                }
+            } catch {
+                print("Erreur de décodage JSON : \(error.localizedDescription)")
+            }
+        }.resume()
+    }
 }
     
     

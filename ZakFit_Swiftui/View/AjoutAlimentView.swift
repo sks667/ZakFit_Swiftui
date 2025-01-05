@@ -34,6 +34,7 @@ struct AjouterAlimentView: View {
                     Button("Annuler") {
                         dismiss()
                     }
+                    .foregroundColor(.orange)
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Ajouter") {
@@ -47,6 +48,7 @@ struct AjouterAlimentView: View {
                         viewModel.ajouterAliment(nom: nom, calories: calories, glucides: glucides, lipides: lipides)
                         dismiss()
                     }
+                    .foregroundColor(.orange)
                 }
             }
         }

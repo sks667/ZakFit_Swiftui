@@ -60,7 +60,7 @@ struct LoginView: View {
                 }
                 .navigationDestination(isPresented: $viewModel.isLoggedIn) {
                     if let token = viewModel.token {
-                        RepasView(viewModel: RepasViewModel(token: token)) // Utilise le token dynamique
+                        MainTabView(token: token) // Remplacement par la TabView principale
                             .navigationBarBackButtonHidden(true)
                     } else {
                         Text("Erreur : Token non disponible")
