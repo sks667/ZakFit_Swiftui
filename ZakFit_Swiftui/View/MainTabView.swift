@@ -8,15 +8,34 @@
 import SwiftUI
 
 struct MainTabView: View {
-    let token: String  // Le token est nécessaire pour passer aux sous-vues
+    let token: String  // Le token est nécessaire pour passer aux sous vues
     
     var body: some View {
         TabView {
             VStack {
-                Text("Bienvenue sur ZakFit 🎯")
-                    .font(.largeTitle)
+                
+                HStack {
+                        Image(systemName: "figure.walk.circle.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.orange)
+                        Text("Bienvenue sur...")
+                            .font(.system(size: 34, weight: .bold, design: .rounded))
+                            .foregroundColor(.orange)
+                }.padding(.top , 170)
+                
+                Image("zakfitimg")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
                     .padding()
-
+                
+                
+                Text("Commence ton suivi sportif dès aujourd'hui")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                Spacer()
+                
              
             }
             .tabItem {
@@ -25,12 +44,12 @@ struct MainTabView: View {
 
             RepasView(viewModel: RepasViewModel(token: token))
                 .tabItem {
-                    Label("Repas", systemImage: "fork.knife")
+                    Label("Repas", systemImage: "takeoutbag.and.cup.and.straw.fill")
                 }
 
             AlimentView(token: token)
                 .tabItem {
-                    Label("Aliments", systemImage: "leaf")
+                    Label("Aliments", systemImage: "carrot.fill")
                     
                 }
         }
@@ -40,5 +59,5 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView(token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmF0aW9uVGltZSI6NjAwLCJ1c2VySWQiOiJDQUZDRTRENy1CN0FELTQyRTItOUZBRS01MTUwOTIwQTI1OTgiLCJleHBpcmF0aW9uIjoxNzM2MDQ2NTY4LjU0MDg4M30.CijfUlqiMDkYrrVCcypmfdTlHtHEtpkCM6eSb0WnrrM")
+    MainTabView(token: "token test")
 }
