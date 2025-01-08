@@ -7,25 +7,13 @@
 
 import Foundation
 
-/// `UserViewModel` est un ViewModel SwiftUI qui gère la logique d'authentification, l'enregistrement des utilisateurs, ainsi que la récupération du profil utilisateur.
 class UserViewModel: ObservableObject {
-    
-    /// Liste des utilisateurs récupérés (rarement utilisée directement dans l'app).
-    @Published var user: [UserModel] = []
-    
-    /// Statut de connexion de l'utilisateur (vrai s'il est connecté, faux sinon).
-    @Published var isLoggedIn = false
-    
-    /// Token JWT pour l'authentification de l'utilisateur.
-    @Published var token: String?
-    
-    /**
-     Récupère la liste des utilisateurs via l'API.
-     
-     Cette fonction effectue une requête GET sécurisée par un token JWT pour récupérer la liste des utilisateurs. Elle est principalement à usage d'administration ou pour afficher le profil complet.
-     
-     - Important : La requête nécessite un token valide.
-     */
+    @Published var user: [UserModel] = [] 
+    @Published var isLoggedIn = false // Statut de connexion
+    @Published var token: String? // Token JWT après authentification
+
+
+
     func fetchUser() {
         guard let token = token else {
             print("Token manquant pour récupérer les utilisateurs")
@@ -58,16 +46,8 @@ class UserViewModel: ObservableObject {
         }.resume()
     }
 
-    /**
-     Connecte un utilisateur via son adresse email et son mot de passe.
-     
-     Cette fonction effectue une requête POST avec une autorisation Basic pour obtenir un token JWT.
-     
-     - Parameters:
-        - email: Adresse email de l'utilisateur.
-        - mdp: Mot de passe de l'utilisateur.
-        - completion: Closure qui retourne un Booléen indiquant si la connexion a réussi.
-     */
+
+
     func login(email: String, mdp: String, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "http://127.0.0.1:8080/user/login") else {
             print("Invalid URL")
@@ -111,20 +91,8 @@ class UserViewModel: ObservableObject {
         }.resume()
     }
 
-    /**
-     Enregistre un nouvel utilisateur dans la base de données via une requête POST.
-     
-     - Parameters:
-        - nom: Nom de l'utilisateur.
-        - prenom: Prénom de l'utilisateur.
-        - taille: Taille en centimètres.
-        - poids: Poids en kilogrammes.
-        - email: Adresse email unique.
-        - mdp: Mot de passe de l'utilisateur.
-        - preferenceAlimentaire: Préférences alimentaires de l'utilisateur.
-     
-     - Note: Cette fonction encode les informations utilisateur sous forme JSON avant de les envoyer.
-     */
+    
+    
     func register(nom: String, prenom: String, taille: Int, poids: Int, email: String, mdp: String, preferenceAlimentaire: String) {
         guard let url = URL(string: "http://localhost:8080/user") else { return }
 
