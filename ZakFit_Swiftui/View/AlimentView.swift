@@ -79,5 +79,5 @@ struct AlimentView: View {
 }
 
 #Preview {
-    AlimentView(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJDQUZDRTRENy1CN0FELTQyRTItOUZBRS01MTUwOTIwQTI1OTgiLCJleHBpcmF0aW9uIjoxNzM2MDQ0NjQ0Ljk0MzE2MzksImV4cGlyYXRpb25UaW1lIjo2MDB9.cG_Wb-wTrlJIFHsRwMj6HMjG-DwFvkCb2RTlhujF0Vo")
+    AlimentView(token: "token-test")
 }

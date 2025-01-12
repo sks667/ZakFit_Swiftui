@@ -8,7 +8,7 @@
 import Foundation
 
 struct RepasModel: Identifiable, Codable {
-    var id: UUID?  // Optionnel pour le POST (généré par le serveur)
+    var id: UUID?  
     var calorieTotal: Double
     var typeRepas: String
     var dateRepas: Date
